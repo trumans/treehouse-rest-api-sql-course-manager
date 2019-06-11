@@ -29,11 +29,13 @@ All routes, except as noted, must contain an Authorization header of type Basic 
 * Credentials not required.
 
 **GET /api/users**
+
 If user credentials are valid:
 * Returns status 200
 * Response body returns the user record. 
 
 **POST /api/users**
+
 If the request body passes validation:
 * A user record is created
 * Status 201 is returned
