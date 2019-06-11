@@ -23,11 +23,23 @@ The database can be reset to it's seed data or empty state with the following:
 
 All routes, except as noted, must contain an Authorization header of type Basic Auth with the user email and unhashed password. (The unhashed password for the seed users can be found in /seed/data.json.) Requests that do not have valid credentials return status 401 with a body containing the message "Access Denied" and a warning to the console (ex: "basic auth expected", "user not found").
 
-**GET /** (root) - status 200. body returns a welcome message. credentials not required.
+**GET /** (root)
+* Returns status 200.
+* Response body returns a welcome message. 
+* Credentials not required.
 
-**GET /api/users** - status 200 if credentials are valid. body returns the user record. 
+**GET /api/users**
+If user credentials are valid:
+* Returns status 200
+* Response body returns the user record. 
 
-**POST /api/users** - if body passes validation then a user record is created,  status 201 is returned with response header Location is set to "/". credentials not required.
+**POST /api/users**
+If the request body passes validation:
+* A user record is created
+* Status 201 is returned
+* Response header Location is set to "/". 
+* Response body returns no content. 
+* Credentials not required.
 
 
 
