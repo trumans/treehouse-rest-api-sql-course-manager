@@ -1,4 +1,6 @@
 
+See 'Extra Credit' section for related functionality
+
 # Installing the project
 
 1. In a terminal window "cd" to project folder
@@ -38,6 +40,11 @@ If user credentials are valid:
 
 **POST /api/users**
 
+The following validations are done to the request body
+* firstName, lastName, emailAddress, password fields are present and not null
+* emailAddress is a valid email format
+* emailAddress is not already on another user record
+
 If the request body passes validation:
 * A user record is created
 * Status 201 is returned
@@ -45,6 +52,10 @@ If the request body passes validation:
 * Response body returns no content. 
 * Credentials not required.
 
+# Extra Credit
+On the POST /api/users route the additional validations are done on the email address
+* it is a valid email format
+* it is not already on another user record
 
 
 # Project Structure
@@ -70,7 +81,7 @@ If the request body passes validation:
 * package-lock.json: npm package configuration
 * package.json: npm package configuration
 * README.md - this file
-* RESTAPI.postman_collection.json: ???
+* RESTAPI.postman_collection.json: Postman test scripts
 * sequelize-cli: sequelize CLI commands used during development
 
 
