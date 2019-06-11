@@ -15,7 +15,7 @@ Connected to database
 ```
 
 ## Resetting the database
-The database can be reset to it's seed data or empty state with the following:
+The database can be reset to its seed data or empty state with the following:
 1. Stop the server by entering ctrl-C in the terminal window
 2. Delete the file fsjstd-restapi.db.
 3. Recreate the database with the command ```npm run seed```. Skipping this command will restart the app with an empty database.
