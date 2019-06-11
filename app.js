@@ -30,6 +30,9 @@ const server = app.listen(app.get('port'), () => {
   console.log(`Express server is listening on port ${server.address().port}`);
 });
 
+// setup routes and related middleware
+app.use(express.json());
+
 const users = require('./routes/users'); 
 const courses = require('./routes/courses');
 app.use('/api/users', users);

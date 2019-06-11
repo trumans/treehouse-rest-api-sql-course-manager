@@ -27,7 +27,6 @@ const authenticateUser = (req, res, next) => {
 				if (u.length) {
 					const user = u[0].dataValues;
 					if (bcryptjs.compareSync(credentials.pass, user.password)) {
-						console.log("AUTH PASSED!");
 						req.currentUser = user;  // ??? return whole record ???
 						next();
 					} else {

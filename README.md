@@ -21,16 +21,41 @@ The database can be reset to it's seed data or empty state with the following:
 
 # Routes
 
-All routes, except for the root, must contain an Authorization header of type Basic Auth with the user email and unhashed password. (The unhashed password for the seed users can be found in /seed/data.json.) Requests that do not have valid credentials return status 401 with a body containing the message "Access Denied" and a warning to the console (ex: "basic auth expected", "user not found").
+All routes, except as noted, must contain an Authorization header of type Basic Auth with the user email and unhashed password. (The unhashed password for the seed users can be found in /seed/data.json.) Requests that do not have valid credentials return status 401 with a body containing the message "Access Denied" and a warning to the console (ex: "basic auth expected", "user not found").
 
-GET / (root) - status 200. body contains a welcome message
+**GET /** (root) - status 200. body returns a welcome message. credentials not required.
 
-GET /api/users - status 200 if credentials are valid. body contains the user record. 
+**GET /api/users** - status 200 if credentials are valid. body returns the user record. 
+
+**POST /api/users** - if body passes validation then a user record is created,  status 201 is returned with response header Location is set to "/". credentials not required.
 
 
 
+# Project Structure
 
+## Primary packages
 
+* sqlite: database
+* sequelize: database ORM
+* express: route handler
+
+## File structure
+
+* config: sequelize database connection parameters
+* migrations: not used
+* models: sequelize models for database tables
+* node_modules: external packages (ex: sequelize, sqlite )
+* routes: code for URLs
+* seed: database creation and populating scripts
+* seeders: not used
+* support: internal support functions, such as authenticateUser
+* app.js: main script
+* nodemon.json: node configuration
+* package-lock.json: npm package configuration
+* package.json: npm package configuration
+* README.md - this file
+* RESTAPI.postman_collection.json: ???
+* sequelize-cli: sequelize CLI commands used during development
 
 
 # === ORIGINAL NOTES FROM STARTER FILES ===
