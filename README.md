@@ -21,7 +21,9 @@ The database can be reset to it's seed data or empty state with the following:
 
 # Routes
 
-All routes, except as noted, must contain an Authorization header of type Basic Auth with the user email and unhashed password. (The unhashed password for the seed users can be found in /seed/data.json.) Requests that do not have valid credentials return status 401 with a body containing the message "Access Denied" and a warning to the console (ex: "basic auth expected", "user not found").
+**User Authentication**
+
+Except as noted, routes must include an Authorization header of type Basic Auth with the user email and plaintext password. (Unencrypted passwords for the seed users can be found in /seed/data.json.) Requests that do not have valid credentials return status 401 with a body containing the message "Access Denied" and a warning to the console (ex: "basic auth expected", "user not found").
 
 **GET /** (root)
 * Returns status 200.
