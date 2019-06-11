@@ -1,4 +1,40 @@
 
+# Installing the project
+
+1. In a terminal window "cd" to project folder
+2. Install npm modules with the command ```npm install```
+3. Create the database with the command ```npm run seed```
+4. Start the application server with the command ```npm start```
+If the application starts successfully the following messages appear in the console
+```
+Express server is listening on port 5000
+Executing (default): SELECT 1+1 AS result
+Connected to database
+```
+
+## Resetting the database
+The database can be reset to it's seed data or empty state with the following:
+1. Stop the server by entering ctrl-C in the terminal window
+2. Delete the file fsjstd-restapi.db.
+3. Recreate the database with the command ```npm run seed```. Skipping this command will restart the app with an empty database.
+4. Restart the application server with the command ```npm start```
+
+# Routes
+
+All routes, except for the root, must contain an Authorization header of type Basic Auth with the user email and unhashed password. (The unhashed password for the seed users can be found in /seed/data.json.) Requests that do not have valid credentials return status 401 with a body containing the message "Access Denied" and a warning to the console (ex: "basic auth expected", "user not found").
+
+GET / (root) - status 200. body contains a welcome message
+
+GET /api/users - status 200 if credentials are valid. body contains the user record. 
+
+
+
+
+
+
+
+# === ORIGINAL NOTES FROM STARTER FILES ===
+
 # Full Stack JavaScript Techdegree v2 - REST API Project
 
 ## Overview of the Provided Project Files

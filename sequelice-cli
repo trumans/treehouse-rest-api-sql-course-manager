@@ -1,0 +1,7 @@
+sequelice-cli
+
+./node_modules/.bin/sequelize init
+
+./node_modules/.bin/sequelize model:create --name User --attributes firstName:string,lastName:string,emailAddress:string,password:string
+
+./node_modules/.bin/sequelize model:create --name Course --attributes title:string,description:text,estimatedTime:string,materialsNeeded:string
