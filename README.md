@@ -40,6 +40,8 @@ If user credentials are valid:
 
 **POST /api/users**
 
+Credentials not required.
+
 The following validations are done to the request body
 * firstName, lastName, emailAddress, password fields are present and not null
 * emailAddress is a valid email format
@@ -50,10 +52,9 @@ If the request body passes validation:
 * Status 201 is returned
 * Response header Location is set to "/". 
 * Response body returns no content. 
-* Credentials not required.
 
 # Extra Credit
-On the POST /api/users route the additional validations are done on the email address
+On the POST /api/users route additional validations are done on the email address
 * it is a valid email format
 * it is not already on another user record
 
