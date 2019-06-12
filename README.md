@@ -25,15 +25,17 @@ The database can be reset to its seed data or empty state with the following:
 
 **User Authentication**
 
-Some routes require user authenication consistenting of an Authorization header of type Basic Auth with the user email and plaintext password. (Unencrypted passwords for the seed users can be found in /seed/data.json.) Authenication failures return status 401 with a body containing the message "Access Denied" and a warning to the console (ex: "basic auth expected", "user not found").
+Some routes require user authenication which require the request has an Authorization header of type Basic Auth with the user email and plaintext password. (Unencrypted passwords for the seed users can be found in /seed/data.json.) Authenication failures return status 401 with a body containing the message "Access Denied" and a warning to the console (ex: "basic auth expected", "user not found").
 
 **GET /** (root)
+
 Welcome message
 * User authentication is not required.
 * Returns status 200.
 * Response body returns a welcome message named "message".
 
 **GET /api/users**
+
 Get the current authenticated user
 * User authentication is required.
 * If credentials are valid:
@@ -41,6 +43,7 @@ Get the current authenticated user
   - Response body returns the user record. 
 
 **POST /api/users**
+
 Create a user
 * User authentication is not required.
 * The request body content is validated:
@@ -57,16 +60,18 @@ Create a user
   * Response body contains an array named "errors" containing strings describing the validation errors
 
 ** GET /api/courses/**
+
 Get a list of all courses
 * User authentication is not required.
 * Status 200 is returned
 * Response body contains an array named "courses" containing all course records including the associated user.
 
 ** GET /api/courses/:id **
+
 Get a courses
 * User authentication is not required.
 * Status 200 is returned
-* Response body contains an array named "course" containing the course and associated user where courses.id = :id
+* Response body contains an array named "course" containing the course and associated user where courses.id is the route :id
 
 # Extra Credit
 On the POST /api/users route additional validations are done on the email address
