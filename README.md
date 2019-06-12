@@ -59,16 +59,16 @@ Create a user
   * Status 400 is returned
   * Response body contains an array named "errors" containing strings describing the validation errors
 
-** GET /api/courses/**
+**GET /api/courses/**
 
 Get a list of all courses
 * User authentication is not required.
 * Status 200 is returned
 * Response body contains an array named "courses" containing all course records including the associated user.
 
-** GET /api/courses/:id **
+**GET /api/courses/:id**
 
-Get a courses
+Get a course
 * User authentication is not required.
 * Status 200 is returned
 * Response body contains an array named "course" containing the course and associated user where courses.id is the route :id
