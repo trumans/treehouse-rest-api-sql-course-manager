@@ -25,33 +25,48 @@ The database can be reset to its seed data or empty state with the following:
 
 **User Authentication**
 
-Except as noted, routes must include an Authorization header of type Basic Auth with the user email and plaintext password. (Unencrypted passwords for the seed users can be found in /seed/data.json.) Requests that do not have valid credentials return status 401 with a body containing the message "Access Denied" and a warning to the console (ex: "basic auth expected", "user not found").
+Some routes require user authenication consistenting of an Authorization header of type Basic Auth with the user email and plaintext password. (Unencrypted passwords for the seed users can be found in /seed/data.json.) Authenication failures return status 401 with a body containing the message "Access Denied" and a warning to the console (ex: "basic auth expected", "user not found").
 
 **GET /** (root)
+Welcome message
+* User authentication is not required.
 * Returns status 200.
-* Response body returns a welcome message. 
-* Credentials not required.
+* Response body returns a welcome message named "message".
 
 **GET /api/users**
-
-If user credentials are valid:
-* Returns status 200
-* Response body returns the user record. 
+Get the current authenticated user
+* User authentication is required.
+* If credentials are valid:
+  - Status 200 is returned
+  - Response body returns the user record. 
 
 **POST /api/users**
+Create a user
+* User authentication is not required.
+* The request body content is validated:
+  * firstName, lastName, emailAddress, password fields are present and not null
+  * emailAddress is a valid email format
+  * emailAddress is not already on another user record
+* When request body validation **passes**:
+  * A user record is created
+  * Status 201 is returned
+  * Response header Location is set to "/". 
+  * Response body returns no content.
+* When request body validatation **fails**:
+  * Status 400 is returned
+  * Response body contains an array named "errors" containing strings describing the validation errors
 
-Credentials not required.
+** GET /api/courses/**
+Get a list of all courses
+* User authentication is not required.
+* Status 200 is returned
+* Response body contains an array named "courses" containing all course records including the associated user.
 
-The following validations are done to the request body
-* firstName, lastName, emailAddress, password fields are present and not null
-* emailAddress is a valid email format
-* emailAddress is not already on another user record
-
-If the request body passes validation:
-* A user record is created
-* Status 201 is returned
-* Response header Location is set to "/". 
-* Response body returns no content. 
+** GET /api/courses/:id **
+Get a courses
+* User authentication is not required.
+* Status 200 is returned
+* Response body contains an array named "course" containing the course and associated user where courses.id = :id
 
 # Extra Credit
 On the POST /api/users route additional validations are done on the email address
