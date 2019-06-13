@@ -89,10 +89,28 @@ Create a new course associated with an existing user record
   * Status 400 is returned
   * Response body contains an array named "errors" containing strings describing the validation errors
 
+**PUT /api/courses/:id**
+
+Update an existing course
+* User authentication is required
+* The request body is validated:
+  * title and description are required and not null
+  * the currently authenticated user must match course userId 
+* When request body validation **passes**:
+  * A user record is updated
+  * If estimatedTime or materialsNeeded are **not** included in the request body they are updated to null
+  * Status 204 is returned
+  * Response body returns no content
+* When request body validatation **fails**:
+  * Status 400 is returned
+  * Response body contains an array named "errors" containing strings describing the validation errors
+
 # Extra Credit
 On the POST /api/users route additional validations are done on the email address
 * it is a valid email format
 * it is not already on another user record
+
+On the PUT /api/courses route the currently authenticated user id must match the course's owner (userId).
 
 
 # Project Structure

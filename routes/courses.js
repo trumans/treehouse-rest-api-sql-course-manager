@@ -30,8 +30,7 @@ router.get('/:id', (req, res) => {
 		});
 });
 
-// Create a new course
-router.post('/', authenticateUser,
+const validateCourse = 
 	[ check('userId')
 		.exists( { checkNull: true, checkFalsy: true } )
 		.withMessage('userId is required')
@@ -45,7 +44,10 @@ router.post('/', authenticateUser,
 	  check('description')
 		.exists( { checkNull: true, checkFalsy: true } )
 		.withMessage('description is required')
-	],
+	]
+
+// Create a new course
+router.post('/', authenticateUser, validateCourse,
 	(req, res) => {
 		const errorMsgs = validationResult(req).array().map(e => e.msg);
 		const newCourse = req.body;
@@ -73,5 +75,36 @@ router.post('/', authenticateUser,
 				}
 			});
 
+});
+
+// Update an existing course
+router.put('/:id', authenticateUser, validateCourse,
+	(req, res) => {
+		const errorMsgs = validationResult(req).array().map(e => e.msg);
+		const newValues = req.body;
+		const courseId = req.params.id; 
+		console.log("auth user", req.currentUser.emailAddress);
+
+		Course
+			.findByPk(courseId)
+			.then((course) => {
+				if (course) {
+					if (req.currentUser.id != course.userId) {
+						errorMsgs.push('Current user cannot update this course');
+					}
+
+					if (!errorMsgs.length) {
+						Course
+							.update(newValues, { where: { id: courseId } })
+							.then((course) => { res.status(204).end() });
+					} else {
+						res.status(400).json({ errors: errorMsgs });
+					}
+				} else {
+					res.status(400).json( { 
+						errors: [ `Course with id '${courseId}' not found` ]
+					});
+				}
+	})
 });
 module.exports = router;
