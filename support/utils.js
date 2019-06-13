@@ -5,12 +5,19 @@ const User = require('../models').User;
 
 /* 
 	Retreive the user record based on the parameter email
-	Returns a promise with the value of the user with the email or null
+	Returns a promise with the a) the user with the email or b) null
 */
 const findUserByEmail = (email) => {
-	return User.findOne({ where: { emailAddress: email || "" } })
+	return User.findOne({ where: { emailAddress: email || "" } });
 }
 
+/*
+	Retreive the user record by id
+	Returns a promise with the user indicated by parameter id
+*/
+const findUserById = (id) => {
+	return User.findByPk(id || 0);
+}
 
 /*
 	Authenticate the user found in the HTTP Authorization header
@@ -47,4 +54,4 @@ const authenticateUser = (req, res, next) => {
 	}
 }
 
-module.exports = { authenticateUser, findUserByEmail };
+module.exports = { authenticateUser, findUserByEmail, findUserById };

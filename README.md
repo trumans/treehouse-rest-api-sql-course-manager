@@ -1,5 +1,5 @@
 
-See 'Extra Credit' section for related functionality
+**See 'Extra Credit' section for related functionality**
 
 # Installing the project
 
@@ -47,7 +47,7 @@ Get the current authenticated user
 Create a user
 * User authentication is not required.
 * The request body content is validated:
-  * firstName, lastName, emailAddress, password fields are present and not null
+  * firstName, lastName, emailAddress, password fields are required and not null
   * emailAddress is a valid email format
   * emailAddress is not already on another user record
 * When request body validation **passes**:
@@ -59,19 +59,35 @@ Create a user
   * Status 400 is returned
   * Response body contains an array named "errors" containing strings describing the validation errors
 
-**GET /api/courses/**
+**GET /api/courses**
 
 Get a list of all courses
 * User authentication is not required.
 * Status 200 is returned
-* Response body contains an array named "courses" containing all course records including the associated user.
+* Response body contains an array named "courses" containing all course records including the associated user
 
 **GET /api/courses/:id**
 
 Get a course
-* User authentication is not required.
+* User authentication is not required
 * Status 200 is returned
 * Response body contains an array named "course" containing the course and associated user where courses.id is the route :id
+
+**POST /api/courses**
+
+Create a new course associated with an existing user record
+* User authentication is required
+* The request body is validated:
+  * title, description and userId are required and not null
+  * userId converts to an integer and is a key to an existing user
+* When request body validation **passes**:
+  * A user record is created
+  * Status 201 is returned
+  * Response header Location is set to "/" + the id of the new course record
+  * Response body returns no content
+* When request body validatation **fails**:
+  * Status 400 is returned
+  * Response body contains an array named "errors" containing strings describing the validation errors
 
 # Extra Credit
 On the POST /api/users route additional validations are done on the email address
