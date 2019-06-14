@@ -64,7 +64,7 @@ Create a user
 Get a list of all courses
 * User authentication is not required.
 * Status 200 is returned
-* Response body contains an array named "courses" containing all course records including the associated user
+* Response body contains an array named "courses" containing all course records and associated users
   * Course records exclude the fields: createdAt, updatedAt
   * User records exclude the fields password, createdAt, updatedAt
 
@@ -123,13 +123,13 @@ Delete a course
   * Response body contains an array named "errors" containing strings describing the validation errors
 
 # Extra Credit for Exceeds Expectations grade
-On the POST /api/users route additional validations are done on the email address
-* it is a valid email format
-* it is not already on another user record
+* On the POST /api/users route additional validations are done on the email address
+  * it is a valid email format
+  * it is not already on another user record
 
-The PUT /api/courses/:id and DELETE /api/courses/:id routes check that the currently authenticated user id matches the course's owner (userId).
+* The PUT /api/courses/:id and DELETE /api/courses/:id routes check that the currently authenticated user id matches the course's owner (userId).
 
-The queries for GET /api/courses and /api/courses/:id exclude the fields: password, createdAt and updatedAt.
+* The queries for GET /api/courses and /api/courses/:id exclude the fields: password, createdAt and updatedAt.
 
 
 # Project Structure
@@ -156,7 +156,7 @@ The queries for GET /api/courses and /api/courses/:id exclude the fields: passwo
 * package.json: npm package configuration
 * README.md - this file
 * RESTAPI.postman_collection.json: Postman test scripts
-* sequelize-cli: sequelize CLI commands used during development
+* scratchpad: miscellenous text used during development, such as sequelize-cli commands
 
 
 # === ORIGINAL NOTES FROM STARTER FILES ===
