@@ -142,22 +142,26 @@ Delete a course
 
 ## File structure
 
-* config: sequelize database connection parameters
-* migrations: not used
-* models: sequelize models for database tables
-* node_modules: external packages (ex: sequelize, sqlite )
-* routes: code for URLs
-* seed: database creation and populating scripts
-* seeders: not used
-* support: internal support functions, such as authenticateUser
+### Primary files
+
 * app.js: main script
+* fsjstd-restapi.db: database
+* \models: sequelize models for database tables
+* README.md - this file
+* \routes: code for URLs
+* \support: internal support functions, such as authenticateUser
+
+### Other
+* \config: sequelize database connection parameters
+* \migrations: not used
+* \node_modules: external packages (ex: sequelize, sqlite )
+* \seed: database creation and populating scripts
+* \seeders: not used
 * nodemon.json: node configuration
 * package-lock.json: npm package configuration
 * package.json: npm package configuration
-* README.md - this file
 * RESTAPI.postman_collection.json: Postman test scripts
 * scratchpad: miscellenous text used during development, such as sequelize-cli commands
-
 
 # === ORIGINAL NOTES FROM STARTER FILES ===
 
