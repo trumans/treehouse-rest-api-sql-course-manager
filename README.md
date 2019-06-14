@@ -19,17 +19,17 @@ Connected to database
 ```
 
 ## Resetting the database
-The database can be reset to its seed data or empty state with the following:
+To reset database to its seed data:
 1. Stop the server by entering ctrl-C in the terminal window
 2. Delete the file fsjstd-restapi.db.
-3. Recreate the database with the command ```npm run seed```. Skipping this command will restart the app with an empty database.
+3. Recreate the database with the command ```npm run seed```.
 4. Restart the application server with the command ```npm start```
 
 # Routes
 
 **User Authentication**
 
-Some routes require user authenication which require the request has an Authorization header of type Basic Auth with the user email and plaintext password. (Unencrypted passwords for the seed users can be found in /seed/data.json.) Authenication failures return status 401 with a body containing the message "Access Denied" and a warning to the console (ex: "basic auth expected", "user not found").
+Some routes require user authenication which expect the request has an Authorization header of type Basic Auth with the user email and plaintext password. (Unencrypted passwords for the seed users can be found in /seed/data.json.) Authenication failures return status 401 with a body containing the message "Access Denied" and a warning to the console (ex: "basic auth expected", "user not found").
 
 **GET /** (root)
 
@@ -127,13 +127,13 @@ Delete a course
   * Response body contains an array named "errors" containing strings describing the validation errors
 
 # Extra Credit for Exceeds Expectations grade
-* On the POST /api/users route additional validations are done on the email address
-  * it is a valid email format
-  * it is not already on another user record
+* On the POST /api/users route additional validations are done on the email address value
+  * it's a valid email format
+  * it's not on another user record
 
 * The PUT /api/courses/:id and DELETE /api/courses/:id routes check that the currently authenticated user id matches the course's owner (userId).
 
-* The queries for GET /api/courses and /api/courses/:id exclude the fields: password, createdAt and updatedAt.
+* The GET /api/courses and /api/courses/:id queries exclude the fields password, createdAt and updatedAt.
 
 
 # Project Structure
