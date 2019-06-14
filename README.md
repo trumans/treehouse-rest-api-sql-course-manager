@@ -94,11 +94,10 @@ Create a new course associated with an existing user record
 Update an existing course
 * User authentication is required
 * The request body is validated:
-  * title and description are required and not null
+  * title and description cannot be updated to null
   * the currently authenticated user must match course userId 
 * When request body validation **passes**:
-  * A user record is updated
-  * If estimatedTime or materialsNeeded are **not** included in the request body they are updated to null
+  * A user record is updated with the fields in the request. _Note that updates to userId are ignored_
   * Status 204 is returned
   * Response body returns no content
 * When request body validatation **fails**:
