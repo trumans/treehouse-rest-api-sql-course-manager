@@ -9,6 +9,6 @@ sequelize-cli
 {
 	"firstName": "Buster",
 	"lastName": "Keaton",
-	"emailAddress": "Buster@damifinos.com",
+	"emailAddress": "Buster@damfinos.com",
 	"password": "busterpassword"
 }
