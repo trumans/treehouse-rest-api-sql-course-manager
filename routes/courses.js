@@ -10,8 +10,12 @@ var User = require("../models").User;
 // Return all courses
 router.get('/', (req, res) => {
 	Course
-		.findAll( { 
-			include: [ { model: User } ] 
+		.findAll( {
+			attributes: { exclude: ['createdAt', 'updatedAt'] },
+			include: [ {
+				model: User,
+				attributes: { exclude: ['password', 'createdAt', 'updatedAt'] }
+			}]
 		})
 		.then((courses) => {
 			res.json( { courses } );
@@ -21,9 +25,13 @@ router.get('/', (req, res) => {
 // Return a single course
 router.get('/:id', (req, res) => {
 	Course
-		.findAll( {
-			where: { id: req.params.id }, 
-			include: [ { model: User } ] 
+		.findOne( {
+			where: { id: req.params.id },
+			attributes: { exclude: ['createdAt', 'updatedAt'] },
+			include: [ {
+				model: User,
+				attributes: { exclude: ['password', 'createdAt', 'updatedAt'] }
+			}]
 		})
 		.then((course) => {
 			res.json( { course } );
@@ -120,6 +128,33 @@ router.put('/:id', authenticateUser,
 					});
 				}
 	})
+});
+
+// Delete a course
+router.delete('/:id', authenticateUser,
+	(req, res) => {
+		const courseId = req.params.id;
+		Course
+			.findByPk(courseId)
+			.then((course) => {
+				if (course) {
+					// validate the current user is the course owner
+					if (req.currentUser.id != course.userId) {
+						res.status(403).json( {
+							errors: [ 'Current user may not delete this course' ]
+						});
+					} else {
+							Course
+								.destroy( { where: { id: courseId } })
+								.then((course) => { res.status(204).end() });
+					}
+				} else {
+					// fail because URI is not a valid course
+					res.status(400).json( {
+						errors: [ `Course with id '${courseId}' not found` ]
+					});
+				}
+			})
 });
 
 module.exports = router;

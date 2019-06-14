@@ -1,5 +1,5 @@
 
-**See 'Extra Credit' section for related functionality**
+**The project includes 'Extra Credit' functionality for 'Exceeds Expectations' grade**
 
 # Installing the project
 
@@ -39,8 +39,8 @@ Welcome message
 Get the current authenticated user
 * User authentication is required.
 * If credentials are valid:
-  - Status 200 is returned
-  - Response body returns the user record. 
+  * Status 200 is returned
+  * Response body returns the user record. 
 
 **POST /api/users**
 
@@ -65,6 +65,8 @@ Get a list of all courses
 * User authentication is not required.
 * Status 200 is returned
 * Response body contains an array named "courses" containing all course records including the associated user
+  * Course records exclude the fields: createdAt, updatedAt
+  * User records exclude the fields password, createdAt, updatedAt
 
 **GET /api/courses/:id**
 
@@ -72,6 +74,8 @@ Get a course
 * User authentication is not required
 * Status 200 is returned
 * Response body contains an array named "course" containing the course and associated user where courses.id is the route :id
+  * Course record excludes the fields: createdAt, updatedAt
+  * User record excludes the fields password, createdAt, updatedAt
 
 **POST /api/courses**
 
@@ -81,7 +85,7 @@ Create a new course associated with an existing user record
   * title, description and userId are required and not null
   * userId converts to an integer and is a key to an existing user
 * When request body validation **passes**:
-  * A user record is created
+  * A course record is created
   * Status 201 is returned
   * Response header Location is set to "/" + the id of the new course record
   * Response body returns no content
@@ -97,19 +101,35 @@ Update an existing course
   * title and description cannot be updated to null
   * the currently authenticated user must match course userId 
 * When request body validation **passes**:
-  * A user record is updated with the fields in the request. _Note that updates to userId are ignored_
+  * The course record is updated with the fields in the request. _Note that any update to userId is ignored._
   * Status 204 is returned
   * Response body returns no content
 * When request body validatation **fails**:
   * Status 400 is returned
   * Response body contains an array named "errors" containing strings describing the validation errors
 
-# Extra Credit
+**DELETE /api/courses/:id**
+
+Delete a course
+* User authentication is required
+* The request is validated:
+  * the currently authenticated user must match course userId 
+* When request body validation **passes**:
+  * The course record is deleted.
+  * Status 204 is returned
+  * Response body returns no content
+* When request body validatation **fails**:
+  * Status 400 is returned
+  * Response body contains an array named "errors" containing strings describing the validation errors
+
+# Extra Credit for Exceeds Expectations grade
 On the POST /api/users route additional validations are done on the email address
 * it is a valid email format
 * it is not already on another user record
 
-On the PUT /api/courses route the currently authenticated user id must match the course's owner (userId).
+The PUT /api/courses/:id and DELETE /api/courses/:id routes check that the currently authenticated user id matches the course's owner (userId).
+
+The queries for GET /api/courses and /api/courses/:id exclude the fields: password, createdAt and updatedAt.
 
 
 # Project Structure
