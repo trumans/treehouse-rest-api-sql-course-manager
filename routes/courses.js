@@ -39,11 +39,7 @@ router.get('/:id', (req, res) => {
 });
 
 const validateCourseBody = 
-	[ check('userId')
-		.exists( { checkNull: true, checkFalsy: true } )
-		.withMessage('userId is required'),
-
-	  check('title')
+	[ check('title')
 		.exists( { checkNull: true, checkFalsy: true } )
 		.withMessage('title is required'),
 
@@ -62,7 +58,7 @@ router.post('/', authenticateUser, validateCourseBody,
 		findUserById(newCourse.userId)
 			.then((owner) => {
 				if (!owner) {
-					errorMsgs.push('userId must be for an existing user')
+					errorMsgs.push('userId is expected for an existing user')
 				}
 
 				if (!errorMsgs.length) {
