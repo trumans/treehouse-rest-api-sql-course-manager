@@ -38,8 +38,7 @@ router.get('/:id', (req, res) => {
 		});
 });
 
-// Create a new course
-router.post('/', authenticateUser,
+const validateCourseBody = 
 	[ check('userId')
 		.exists( { checkNull: true, checkFalsy: true } )
 		.withMessage('userId is required'),
@@ -51,7 +50,10 @@ router.post('/', authenticateUser,
 	  check('description')
 		.exists( { checkNull: true, checkFalsy: true } )
 		.withMessage('description is required')
-	],
+	]
+
+// Create a new course
+router.post('/', authenticateUser, validateCourseBody,
 	(req, res) => {
 		const errorMsgs = validationResult(req).array().map(e => e.msg);
 		const newCourse = req.body;
@@ -84,15 +86,7 @@ router.post('/', authenticateUser,
 });
 
 // Update an existing course
-router.put('/:id', authenticateUser, 
-	[ check('title')
-		.custom(title => (title == undefined || title != "") )
-		.withMessage('title cannot be null'),
-
-	  check('description')
-		.custom(descr => (descr == undefined || descr != "") ) 
-		.withMessage('description cannot be null')
-	],
+router.put('/:id', authenticateUser, validateCourseBody,
 	(req, res) => {
 		const newValues = req.body;
 		const courseId = req.params.id;
