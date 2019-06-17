@@ -74,7 +74,7 @@ router.post('/', authenticateUser,
 							materialsNeeded:  newCourse.materialsNeeded
 						})
 						.then((course) => {
-							res.location(`/${course.id}`).status(201).end();
+							res.location(`/api/courses/${course.id}`).status(201).end();
 						});
 				} else {
 					// otherwise return the validations errors
