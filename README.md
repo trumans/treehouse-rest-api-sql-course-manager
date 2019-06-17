@@ -91,7 +91,7 @@ Create a new course associated with an existing user record
 * When request body validation **passes**:
   * A course record is created
   * Status 201 is returned
-  * Response header Location is set to "/" + the id of the new course record
+  * Response header Location is set to "/api/courses/" + the new course id
   * Response body returns no content
 * When request body validatation **fails**:
   * Status 400 is returned
@@ -102,7 +102,7 @@ Create a new course associated with an existing user record
 Update an existing course
 * User authentication is required
 * The request body is validated:
-  * title and description cannot be updated to null
+  * title and description are required and cannot be null
   * the currently authenticated user must match course userId 
 * When request body validation **passes**:
   * The course record is updated with the fields in the request. _Note that any update to userId is ignored._
