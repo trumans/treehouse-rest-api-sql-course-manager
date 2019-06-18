@@ -2,7 +2,7 @@
 **Notes to the Treehouse reviewer** 
 * The project includes 'Extra Credit' functionality for 'Exceeds Expectations' grade
 * The following implementation decisions relate to the PUT /api/courses/:id API
-  * Only the fields in the request are updated. Fields are not set to null if they are not included.
+  * The fields estimatedTime and materialsNeeded are optional in the request. If omitted they are not updated.
   * Updating the userId field is not supported. If it is included in the request body the field is silently ignored. 
 
 # Installing the project
